@@ -1,0 +1,68 @@
+/*
+> 🧱 Added Bronze schema DDL script for Data Warehouse project — drops existing tables if present and recreates customer, product,
+sales, category, location, and ERP-related tables (`crom_cust_info`, `crom_prd_info`, `crom_sales_details_id`, `erp_PX_CAT_G1V2`, `erp_LOC_A101`, `erp_CUST_AZ12`)
+to form the raw data foundation in the bronze layer.
+*/
+
+
+
+
+if OBJECT_ID('bronze.crom_cust_info','U') is not null
+   drop table bronze.crom_cust_info;
+create table bronze.crom_cust_info(
+cst_id INT,
+cst_key NVARCHAR(50),
+cst_filename nvarchar(50),
+cst_lastname nvarchar(50),
+cst_material_status nvarchar(50),
+cst_gndr nvarchar(50),
+cst_create_date DATE
+
+);
+if OBJECT_ID('bronze.crom_prd_info','U') is not null
+   drop table bronze.crom_prd_info;
+create table bronze.crom_prd_info(
+prd_id INT,
+prd_key nvarchar(50),
+prd_nm nvarchar(50),
+prd_cost int,
+prd_line nvarchar(50),
+prd_start_dt date,
+prd_end_dt date
+
+);
+if OBJECT_ID('bronze.crom_sales_details_id','U') is not null
+   drop table  bronze.crom_sales_details_id;
+create table bronze.crom_sales_details_id(
+sls_ord_num nvarchar(50),
+sls_pred_key nvarchar(50),
+sls_cust_id int,
+sls_order_dt int,
+sls_ship_dt int,
+sls_due_dt int,
+sls_sales int,
+sls_quantity int,
+sls_price int
+);
+if OBJECT_ID('bronze.erp_PX_CAT_G1V2','U') is not null
+   drop table bronze.erp_PX_CAT_G1V2;
+create table bronze.erp_PX_CAT_G1V2(
+ID NVARCHAR(50),
+CAT NVARCHAR(50),
+SUBCAT NVARCHAR(50),
+MAINTENANCE NVARCHAR(50)
+);
+if OBJECT_ID('bronze.erp_LOC_A101','U') is not null
+   drop table bronze.erp_LOC_A101;
+create table bronze.erp_LOC_A101(
+CID NVARCHAR(50),
+CNTRY VARCHAR(50)
+
+);
+if OBJECT_ID('bronze.erp_CUST_AZ12','U') is not null
+   drop table bronze.erp_CUST_AZ12;
+CREATE TABLE bronze.erp_CUST_AZ12(
+CID NVARCHAR(50),
+BDATE DATE,
+GEN NVARCHAR(50)
+);
